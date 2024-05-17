@@ -1,0 +1,969 @@
+{
+	"asset":
+	{
+		"version": "2.0",
+		"generator": "Unreal Engine 5.3.2"
+	},
+	"scene": 0,
+	"accessors": [
+		{
+			"bufferView": 0,
+			"count": 6,
+			"type": "SCALAR",
+			"componentType": 5121
+		},
+		{
+			"bufferView": 1,
+			"count": 4,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.5, -8.04061311e-17, -0.5 ],
+			"max": [ 0.5, 8.04061311e-17, 0.5 ]
+		},
+		{
+			"bufferView": 2,
+			"count": 4,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 3,
+			"count": 4,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 4,
+			"count": 4,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 5,
+			"count": 4,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 6,
+			"count": 2787,
+			"type": "SCALAR",
+			"componentType": 5123
+		},
+		{
+			"bufferView": 7,
+			"count": 1203,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.533037663, -5.28005362, -0.450908661 ],
+			"max": [ 0.540360093, 5.2779417, 0.460284829 ]
+		},
+		{
+			"bufferView": 8,
+			"count": 1203,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 9,
+			"count": 1203,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 10,
+			"count": 1203,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 11,
+			"count": 1203,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 12,
+			"count": 1203,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 13,
+			"count": 2646,
+			"type": "SCALAR",
+			"componentType": 5123
+		},
+		{
+			"bufferView": 14,
+			"count": 1345,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -6.15957117, -0.0298324581, -2.19847512 ],
+			"max": [ 0.187372103, 7.73899508, 2.19562125 ]
+		},
+		{
+			"bufferView": 15,
+			"count": 1345,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 16,
+			"count": 1345,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 17,
+			"count": 1345,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 18,
+			"count": 1345,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 19,
+			"count": 1345,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 20,
+			"count": 858,
+			"type": "SCALAR",
+			"componentType": 5123
+		},
+		{
+			"bufferView": 21,
+			"count": 490,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.906858444, -1.12011313, 0.040069174 ],
+			"max": [ 0.906858444, 1.12121511, 0.0795292109 ]
+		},
+		{
+			"bufferView": 22,
+			"count": 490,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 23,
+			"count": 490,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 24,
+			"count": 490,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 25,
+			"count": 490,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 26,
+			"count": 490,
+			"type": "VEC2",
+			"componentType": 5126
+		}
+	],
+	"buffers": [
+		{
+			"uri": "asset3.bin",
+			"byteLength": 207248
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 6,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 48,
+			"byteOffset": 8,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 48,
+			"byteOffset": 56,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 64,
+			"byteOffset": 104,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 32,
+			"byteOffset": 168,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 32,
+			"byteOffset": 200,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 5574,
+			"byteOffset": 232,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 14436,
+			"byteOffset": 5808,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 14436,
+			"byteOffset": 20244,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 19248,
+			"byteOffset": 34680,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 9624,
+			"byteOffset": 53928,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 9624,
+			"byteOffset": 63552,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 9624,
+			"byteOffset": 73176,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 5292,
+			"byteOffset": 82800,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 16140,
+			"byteOffset": 88092,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 16140,
+			"byteOffset": 104232,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 21520,
+			"byteOffset": 120372,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 10760,
+			"byteOffset": 141892,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 10760,
+			"byteOffset": 152652,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 10760,
+			"byteOffset": 163412,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1716,
+			"byteOffset": 174172,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 5880,
+			"byteOffset": 175888,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 5880,
+			"byteOffset": 181768,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 7840,
+			"byteOffset": 187648,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 3920,
+			"byteOffset": 195488,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 3920,
+			"byteOffset": 199408,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 3920,
+			"byteOffset": 203328,
+			"target": 34962
+		}
+	],
+	"images": [
+		{
+			"uri": "M_Neo2_BaseColor.png"
+		},
+		{
+			"uri": "M_Neo2_Emissive.png"
+		},
+		{
+			"uri": "M_Metal_MetallicRoughness.png"
+		},
+		{
+			"uri": "T_Metal_BaseColor.png"
+		},
+		{
+			"uri": "T_Metal_Normal.png"
+		},
+		{
+			"uri": "T_Metal_OcclusionRoughnessMetallic_Linear.png"
+		}
+	],
+	"materials": [
+		{
+			"name": "M_Neo2",
+			"pbrMetallicRoughness":
+			{
+				"baseColorTexture":
+				{
+					"index": 0
+				},
+				"metallicFactor": 0,
+				"roughnessFactor": 0.5
+			},
+			"emissiveTexture":
+			{
+				"index": 1
+			},
+			"emissiveFactor": [ 1, 1, 1 ],
+			"alphaMode": "BLEND",
+			"doubleSided": true,
+			"extensions":
+			{
+				"KHR_materials_emissive_strength":
+				{
+					"emissiveStrength": 3
+				}
+			}
+		},
+		{
+			"name": "M_Metal",
+			"pbrMetallicRoughness":
+			{
+				"baseColorTexture":
+				{
+					"index": 2
+				},
+				"metallicRoughnessTexture":
+				{
+					"index": 3
+				}
+			},
+			"normalTexture":
+			{
+				"index": 4
+			},
+			"occlusionTexture":
+			{
+				"index": 5
+			},
+			"doubleSided": true
+		},
+		{
+			"name": "M_NeonSign",
+			"pbrMetallicRoughness":
+			{
+				"baseColorFactor": [ 0, 0, 0, 1 ],
+				"metallicFactor": 0,
+				"roughnessFactor": 0.5
+			}
+		}
+	],
+	"meshes": [
+		{
+			"name": "Plane",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 1,
+						"NORMAL": 2,
+						"TANGENT": 3,
+						"TEXCOORD_0": 4,
+						"TEXCOORD_1": 5
+					},
+					"indices": 0,
+					"material": 0
+				}
+			]
+		},
+		{
+			"name": "SM_pipe",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 7,
+						"NORMAL": 8,
+						"TANGENT": 9,
+						"TEXCOORD_0": 10,
+						"TEXCOORD_1": 11,
+						"TEXCOORD_2": 12
+					},
+					"indices": 6,
+					"material": 1
+				}
+			]
+		},
+		{
+			"name": "SM_Pipe2",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 14,
+						"NORMAL": 15,
+						"TANGENT": 16,
+						"TEXCOORD_0": 17,
+						"TEXCOORD_1": 18,
+						"TEXCOORD_2": 19
+					},
+					"indices": 13,
+					"material": 1
+				}
+			]
+		},
+		{
+			"name": "SM_NeonSign",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 21,
+						"NORMAL": 22,
+						"TANGENT": 23,
+						"TEXCOORD_0": 24,
+						"TEXCOORD_1": 25,
+						"TEXCOORD_2": 26
+					},
+					"indices": 20,
+					"material": 2
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"name": "Plane2",
+			"translation": [ 6.36016941, 4.89631844, 11.1016026 ],
+			"rotation": [ 0.707106829, -0, 0, 0.707106829 ],
+			"scale": [ 7, 4.5, 5 ],
+			"mesh": 0
+		},
+		{
+			"name": "pipe",
+			"translation": [ 12.4987326, 0.591247499, 23.9117908 ],
+			"mesh": 1
+		},
+		{
+			"name": "pipe2",
+			"translation": [ 4.32370424, 1.94998968, 47.9516602 ],
+			"rotation": [ -0, -0.707106829, 0, 0.707106829 ],
+			"mesh": 1
+		},
+		{
+			"name": "Pipe3",
+			"translation": [ 6.59623575, 4.05162764, 38.7455902 ],
+			"rotation": [ 0, 1, -0, 1.21679662e-08 ],
+			"mesh": 2
+		},
+		{
+			"name": "pipe4",
+			"translation": [ 17.6207657, 6.50734949, 46.6158295 ],
+			"mesh": 1
+		},
+		{
+			"name": "Plane3",
+			"translation": [ 15.2594481, 6.93788338, 29.1973553 ],
+			"rotation": [ 0.5, -0.5, 0.5, 0.5 ],
+			"scale": [ 20.5, 18, 18.5 ],
+			"mesh": 0
+		},
+		{
+			"name": "pipe5",
+			"translation": [ -8.41468906, 1.94998991, 55.7351952 ],
+			"rotation": [ 0, 0.707106829, -0, 0.707106829 ],
+			"mesh": 1
+		},
+		{
+			"name": "Pipe6",
+			"translation": [ -9.38721943, 4.05162811, 64.9412613 ],
+			"mesh": 2
+		},
+		{
+			"name": "pipe7",
+			"translation": [ -21.71175, 6.50735044, 57.0710182 ],
+			"rotation": [ -0, -1, 0, 1.21679653e-08 ],
+			"mesh": 1
+		},
+		{
+			"name": "pipe8",
+			"translation": [ 40.3596725, 1.94999003, -14.432292 ],
+			"rotation": [ -0, -0.707106829, 0, 0.707106829 ],
+			"mesh": 1
+		},
+		{
+			"name": "Pipe9",
+			"translation": [ 41.3322029, 4.05162811, -23.6383591 ],
+			"rotation": [ 0, 1, -0, 8.72664607e-09 ],
+			"mesh": 2
+		},
+		{
+			"name": "pipe10",
+			"translation": [ 53.6567307, 6.50735044, -15.7681208 ],
+			"mesh": 1
+		},
+		{
+			"name": "pipe11",
+			"translation": [ 62.9624825, 21.0991859, -16.9140129 ],
+			"rotation": [ 0, 0.707106829, -0, 0.707106829 ],
+			"mesh": 1
+		},
+		{
+			"name": "Pipe12",
+			"translation": [ 61.9899483, 23.2008247, -7.70794487 ],
+			"mesh": 2
+		},
+		{
+			"name": "pipe13",
+			"translation": [ 49.6654205, 25.6565475, -15.5781832 ],
+			"rotation": [ -0, -1, 0, 1.21679644e-08 ],
+			"mesh": 1
+		},
+		{
+			"name": "pipe14",
+			"translation": [ -41.7607117, -1.80060172, -14.432292 ],
+			"rotation": [ -0, -0.707106829, 0, 0.707106829 ],
+			"mesh": 1
+		},
+		{
+			"name": "Pipe15",
+			"translation": [ -40.7881813, 0.301036268, -23.6383591 ],
+			"rotation": [ 0, 1, -0, 8.72664607e-09 ],
+			"mesh": 2
+		},
+		{
+			"name": "pipe16",
+			"translation": [ -28.4636517, 2.75675845, -15.7681208 ],
+			"mesh": 1
+		},
+		{
+			"name": "pipe17",
+			"translation": [ -19.1579018, 17.3485966, -16.9140129 ],
+			"rotation": [ 0, 0.707106829, -0, 0.707106829 ],
+			"mesh": 1
+		},
+		{
+			"name": "Pipe18",
+			"translation": [ -20.1304321, 19.4502335, -7.70794535 ],
+			"mesh": 2
+		},
+		{
+			"name": "pipe19",
+			"translation": [ -32.4549637, 21.9059563, -15.5781832 ],
+			"rotation": [ -0, -1, 0, 8.72664607e-09 ],
+			"mesh": 1
+		},
+		{
+			"name": "NeonSign",
+			"translation": [ 6.16669178, 1.84672606, 12.6510229 ],
+			"mesh": 3
+		},
+		{
+			"name": "Plane4",
+			"translation": [ -13.7806273, 9.1325798, 22.7811527 ],
+			"rotation": [ 0.707106829, 1.86864701e-09, -1.86864701e-09, 0.707106829 ],
+			"scale": [ 20.2579422, 17.7579422, 18.2579422 ],
+			"mesh": 0
+		},
+		{
+			"name": "pipe20",
+			"translation": [ -28.4103737, -1.620718, 63.4177666 ],
+			"rotation": [ 0, 0.707106829, -0, 0.707106829 ],
+			"scale": [ 0.954824805, 0.954824805, 0.954824805 ],
+			"mesh": 1
+		},
+		{
+			"name": "Pipe21",
+			"translation": [ -29.3389683, 0.385978162, 72.2079468 ],
+			"scale": [ 0.954824805, 0.954824805, 0.954824805 ],
+			"mesh": 2
+		},
+		{
+			"name": "pipe22",
+			"translation": [ -41.106739, 2.73076248, 64.6932526 ],
+			"rotation": [ -0, -1, 0, 8.72664252e-09 ],
+			"scale": [ 0.954824805, 0.954824805, 0.954824805 ],
+			"mesh": 1
+		},
+		{
+			"name": "NewMaterial",
+			"translation": [ -9.3902626, 1.44959068, 46.6725426 ],
+			"rotation": [ 4.3020254e-09, -0.707106829, 0.707106829, -4.3020254e-09 ]
+		},
+		{
+			"name": "M_Decal2",
+			"translation": [ -6.72137213, 0.333066374, 53.8232346 ],
+			"rotation": [ -0.54167521, 0.45451948, -0.45451948, 0.54167521 ],
+			"scale": [ 0.424847245, 0.712423623, 0.712423623 ]
+		},
+		{
+			"name": "M_Decal3",
+			"translation": [ -4.6924901, 2.04223633, 21.2912102 ],
+			"rotation": [ 0.0616284199, -0.704416037, 0.704416037, -0.0616284199 ],
+			"scale": [ 0.160588697, 0.445495427, 0.580294371 ]
+		},
+		{
+			"name": "M_Decal4",
+			"translation": [ 8.50699615, 1.90077782, 23.6844139 ],
+			"rotation": [ 0.579227984, 0.579227984, -0.405579805, 0.405579805 ],
+			"scale": [ 0.458939254, 0.729469836, 0.729469836 ]
+		},
+		{
+			"name": "M_Decal5",
+			"translation": [ 9.77848434, 3.41648388, 28.2601776 ],
+			"rotation": [ 0.405579776, 0.405579776, -0.579227984, 0.579227984 ],
+			"scale": [ 0.360673219, 0.680336356, 0.680336356 ]
+		},
+		{
+			"name": "M_Water",
+			"translation": [ -3.4231658, -0.263638765, 37.2974243 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.152416214, 0.311353475, 0.576208055 ]
+		},
+		{
+			"name": "M_Water2",
+			"translation": [ 2.15401506, -0.260632187, 30.7064304 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.152416006, 0.311352998, 0.576207995 ]
+		},
+		{
+			"name": "M_Water3",
+			"translation": [ -5.1823597, 0.027347289, 42.3279076 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.152416006, 0.694473565, 0.872214377 ]
+		},
+		{
+			"name": "M_Decal6",
+			"translation": [ -6.46357918, 10.1904316, 21.2754536 ],
+			"rotation": [ 0.122787826, 0.707106829, -0.696364284, 3.48962836e-09 ],
+			"scale": [ 1, 0.767904758, 1 ]
+		},
+		{
+			"name": "M_Water5",
+			"translation": [ -2.83527493, -0.417263061, 6.12552118 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.390227139, 0.526847839, 0.695113361 ]
+		},
+		{
+			"name": "M_Decal7",
+			"translation": [ 5.37215805, 2.38415837, 49.8521423 ],
+			"rotation": [ 0.5, 0.5, -0.5, 0.5 ],
+			"scale": [ 0.133879945, 0.563531935, 1 ]
+		},
+		{
+			"name": "M_Water1",
+			"translation": [ 0.452465266, 0.0636308789, 35.2729759 ],
+			"rotation": [ -0.183012694, 0.183012694, -0.683012724, 0.683012724 ],
+			"scale": [ 0.32562685, 0.662813365, 0.662813365 ]
+		},
+		{
+			"name": "M_Water6",
+			"translation": [ 2.42412114, 0.0636309013, 20.8786564 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 1.37269819, 1.18634868, 1.18634868 ]
+		},
+		{
+			"name": "M_Water7",
+			"translation": [ -3.18203759, -0.336626768, 13.1304274 ],
+			"rotation": [ 0.353553385, -0.353553385, -0.612372458, 0.612372458 ],
+			"scale": [ 0.325626999, 0.662813008, 0.662813008 ]
+		},
+		{
+			"name": "M_Water8",
+			"translation": [ 7.0307126, -0.894767523, 29.4133835 ],
+			"rotation": [ 0.0616284162, -0.0616284162, -0.704416037, 0.704416037 ]
+		},
+		{
+			"name": "M_Water4",
+			"translation": [ 2.32560682, 0.143876582, 36.1224174 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.173424259, 0.586712122, 0.586712122 ]
+		},
+		{
+			"name": "M_Decal8",
+			"translation": [ 7.09288311, 1.55096757, 27.1461258 ],
+			"scale": [ 0.521160722, 0.760580361, 0.619930744 ]
+		},
+		{
+			"name": "M_Decal9",
+			"translation": [ -4.75071907, 1.56099641, 15.1514196 ],
+			"rotation": [ 6.12323426e-17, -6.12323426e-17, 1, -6.0839791e-09 ],
+			"scale": [ 0.283688933, 0.641844571, 0.641844571 ]
+		},
+		{
+			"name": "M_Water9",
+			"translation": [ 0.524143219, 0.0636308938, 8.36577034 ],
+			"rotation": [ 0.405579776, -0.405579776, 0.579227984, -0.579227984 ],
+			"scale": [ 1.37269795, 1.18634903, 1.18634903 ]
+		},
+		{
+			"name": "M_Water10",
+			"translation": [ 0.524143219, 0.0636309013, 8.36577034 ],
+			"rotation": [ 0.405579776, -0.405579776, 0.579227984, -0.579227984 ],
+			"scale": [ 1.37269795, 1.18634903, 1.18634903 ]
+		},
+		{
+			"name": "M_Decal10",
+			"translation": [ -6.26061344, 1.01056278, 43.5819702 ],
+			"rotation": [ 6.12323426e-17, -6.12323426e-17, 1, -6.08398709e-09 ],
+			"scale": [ -0.261954397, 0.226360217, 0.226360217 ]
+		},
+		{
+			"name": "M_Decal11",
+			"translation": [ -5.52303219, 1.01056266, 12.0138741 ],
+			"rotation": [ 0.707106829, -6.17067153e-09, 0.707106829, -6.17067153e-09 ],
+			"scale": [ -0.26195401, 0.226359993, 0.226359993 ]
+		},
+		{
+			"name": "M_Decal12",
+			"translation": [ 2.12754536, -0.151020527, 47.432045 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.0619491823, 0.716612041, 0.716612041 ]
+		},
+		{
+			"name": "M_Decal13",
+			"translation": [ -5.77193594, -0.722548366, 45.6222801 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.671818554, 1, 1 ]
+		},
+		{
+			"name": "M_Decal14",
+			"translation": [ -2.64909387, -0.151020303, 38.4485168 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.0619489998, 0.716611981, 0.716611981 ]
+		},
+		{
+			"name": "M_Decal15",
+			"translation": [ 3.86903453, -0.151020318, 29.6003532 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.0619489998, 0.716611981, 0.716611981 ]
+		},
+		{
+			"name": "M_Decal16",
+			"translation": [ 5.91996098, -0.06408865, 21.9445095 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.0619489998, 0.716611981, 0.716611981 ]
+		},
+		{
+			"name": "M_Decal17",
+			"translation": [ 3.26141238, -0.0782878399, 38.8744392 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.0619489998, 0.716611981, 0.716611981 ]
+		},
+		{
+			"name": "M_Decal18",
+			"translation": [ 5.06737947, -1.23220575, 51.7637863 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ]
+		},
+		{
+			"name": "M_Decal19",
+			"translation": [ -3.95949125, -0.259933442, 52.7580605 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.283989757, 0.98604393, 0.921639323 ]
+		},
+		{
+			"name": "M_Decal20",
+			"translation": [ -3.3034482, -0.0974033177, 39.4456139 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.297387868, 0.210005641, 0.210005641 ]
+		},
+		{
+			"name": "M_Water11",
+			"translation": [ -0.526774228, 0.0636308491, 43.0200081 ],
+			"rotation": [ -0.183012709, 0.183012709, -0.683012724, 0.683012724 ],
+			"scale": [ 0.325626999, 1.41908193, 1.79585934 ]
+		},
+		{
+			"name": "M_Decal21",
+			"translation": [ -0.60429728, -0.259933382, 56.1242332 ],
+			"rotation": [ 0.298836231, -0.298836231, 0.640856385, -0.640856385 ],
+			"scale": [ 0.283989996, 0.98604399, 0.921639025 ]
+		},
+		{
+			"name": "M_Decal22",
+			"translation": [ -3.0002749, -0.259933412, 48.259304 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.283989996, 0.98604399, 0.921639025 ]
+		},
+		{
+			"name": "M_Decal23",
+			"translation": [ 0.180806562, -0.259933442, 42.9735184 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.283989996, 0.98604399, 0.921639025 ]
+		},
+		{
+			"name": "M_Decal24",
+			"translation": [ 0.180806562, -0.259933442, 33.6725082 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.283989996, 0.98604399, 0.921639025 ]
+		},
+		{
+			"name": "M_Decal25",
+			"translation": [ -2.44426584, -0.259933442, 27.7861004 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.283989996, 0.98604399, 0.921639025 ]
+		},
+		{
+			"name": "M_Decal26",
+			"translation": [ -2.44426584, -0.259933442, 13.9205284 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ],
+			"scale": [ 0.283989996, 0.98604399, 0.921639025 ]
+		},
+		{
+			"name": "M_Decal27",
+			"translation": [ 1.8439132, -0.259933531, 9.80759621 ],
+			"rotation": [ -0.241844758, 0.241844758, -0.664463043, 0.664463043 ],
+			"scale": [ 0.283989996, 0.98604399, 0.921639025 ]
+		},
+		{
+			"name": "M_Water12",
+			"translation": [ 0.547392011, 0.0636308491, 53.3483925 ],
+			"rotation": [ -0.183012709, 0.183012709, -0.683012724, 0.683012724 ],
+			"scale": [ 0.325626999, 1.41908205, 1.79585898 ]
+		},
+		{
+			"name": "M_Water13",
+			"translation": [ -4.00529957, 0.0636308715, 54.922699 ],
+			"rotation": [ 0.241844758, -0.241844758, -0.664463043, 0.664463043 ],
+			"scale": [ 0.325626999, 1.41908205, 1.79585898 ]
+		},
+		{
+			"name": "M_Decal28",
+			"translation": [ 4.4237175, 7.02899694, 47.9880524 ],
+			"rotation": [ 6.12323426e-17, -6.12323426e-17, 1, -6.08397999e-09 ],
+			"scale": [ 0.0297705475, 0.499141216, 0.499141216 ]
+		},
+		{
+			"name": "M_Decal29",
+			"translation": [ -10.812417, 4.86539793, 48.7542572 ],
+			"rotation": [ -0.54167521, -0.54167521, -0.45451948, 0.45451948 ],
+			"scale": [ 1, 0.857665181, 0.871407986 ]
+		},
+		{
+			"name": "M_Decal1",
+			"translation": [ -8.71611881, -1.24112022, 59.029129 ],
+			"rotation": [ 0, -0, -0.707106829, 0.707106829 ]
+		},
+		{
+			"name": "M_Decal30",
+			"translation": [ 5.27953482, 3.46079898, 57.0186996 ],
+			"rotation": [ 0.707106829, 4.30202718e-09, -4.30202318e-09, 0.707106829 ],
+			"scale": [ 1, 0.388625085, 0.646796525 ]
+		}
+	],
+	"samplers": [
+		{
+			"minFilter": 9987,
+			"magFilter": 9729
+		}
+	],
+	"scenes": [
+		{
+			"name": "Map_1",
+			"nodes": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70 ]
+		}
+	],
+	"textures": [
+		{
+			"name": "M_Neo2_BaseColor",
+			"sampler": 0,
+			"source": 0
+		},
+		{
+			"name": "M_Neo2_Emissive",
+			"sampler": 0,
+			"source": 1
+		},
+		{
+			"name": "T_Metal_BaseColor",
+			"sampler": 0,
+			"source": 3
+		},
+		{
+			"name": "M_Metal_MetallicRoughness",
+			"sampler": 0,
+			"source": 2
+		},
+		{
+			"name": "T_Metal_Normal",
+			"sampler": 0,
+			"source": 4
+		},
+		{
+			"name": "T_Metal_OcclusionRoughnessMetallic_Linear",
+			"sampler": 0,
+			"source": 5
+		}
+	],
+	"extensionsUsed": [
+		"KHR_materials_emissive_strength"
+	]
+}
