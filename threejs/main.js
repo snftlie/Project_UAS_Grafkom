@@ -56,6 +56,12 @@ scene.add(light);
 // AMBIENT
 light = new THREE.AmbientLight(0xffffff, 1); // soft white light
 scene.add(light);
+
+// rectangle light (buat neon)
+const rectLight1 = new THREE.RectAreaLight( 0xff0000, 5, 4, 10 );
+rectLight1.position.set( - 5, 5, 5 );
+scene.add( rectLight1 );
+
 //buat kubus ijo muter" sama ada line bentuk segitiga sama kaki tanpa alas
 //geometry
 // const points =
