@@ -149,7 +149,7 @@ loader1.load("Walking.fbx", function (object) {
   });
 
   object.position.set(5, 0, 0);
-  object.scale.setScalar(0.1);
+  object.scale.setScalar(0.01);
   scene.add(object);
 });
 
@@ -167,7 +167,7 @@ loader1.load("Breathing Idle.fbx", function (object) {
     }
   });
 
-  object.scale.setScalar(0.1);
+  object.scale.setScalar(0.01);
   scene.add(object);
 });
 
@@ -189,6 +189,7 @@ loader1.load("Breathing Idle.fbx", function (object) {
 //        }, onProgress );
 
 //      } );
+
 const loader = new GLTFLoader();
 // loader.setPath( 'coba_aset/' );//COBA
 // loader.load( 'scene.gltf',function ( gltf ) {
@@ -197,70 +198,19 @@ const loader = new GLTFLoader();
 //   renderer.compileAsync( model, camera, scene );
 //   scene.add( model );
 // } );
-// loader.setPath("export_unreal/");
-// loader.load("EXPORT.gltf", function (gltf) {
-//   const model = gltf.scene;
-//   // wait until the model can be added to the scene without blocking due to shader compilation
-//   renderer.compileAsync(model, camera, scene);
-//   scene.add(model);
-// });
-// loader.load("asset2/asset2.gltf", function (gltf) {
-//   const model = gltf.scene;
-//   // wait until the model can be added to the scene without blocking due to shader compilation
-//   renderer.compileAsync(model, camera, scene);
-//   scene.add(model);
-// });
-// // loader.setPath( 'export_unreal/asset3' );
-// loader.load("asset3/asset3.gltf", function (gltf) {
-//   const model = gltf.scene;
-//   // wait until the model can be added to the scene without blocking due to shader compilation
-//   renderer.compileAsync(model, camera, scene);
-//   scene.add(model);
-// });
-// // loader.setPath( 'export_unreal/asset4' );
-// loader.load("asset4/asset4.gltf", function (gltf) {
-//   const model = gltf.scene;
-//   // wait until the model can be added to the scene without blocking due to shader compilation
-//   renderer.compileAsync(model, camera, scene);
-//   scene.add(model);
-// });
 
-// sun
-// var geometry = new THREE.SphereGeometry(1,12,3);
-// var material = new THREE.MeshBasicMaterial({color:0xffff00});
-// var sun = new THREE.Mesh(geometry, material);
-// scene.add(sun);
-// object.push(sun);
-
-// // earth
-// geometry = new THREE.SphereGeometry(0.33,12,3);
-// material = new THREE.MeshBasicMaterial({color:0x00aaff});
-// var earth = new THREE.Mesh(geometry, material);
-// scene.add(earth);
-// object.push(earth);
-
-// //geser earth ke kanan
-// earth.position.x = 2;
-
-// // moon
-// geometry = new THREE.SphereGeometry(0.111,12,3);
-// material = new THREE.MeshBasicMaterial({color:0x5555ff});
-// var moon = new THREE.Mesh(geometry, material);
-// scene.add(moon);
-// object.push(moon);
-// moon.position.x = 0.5;
-
-// sun.add(earth); // biar bumi bisa ngelilingi mataharinya
-// earth.add(moon);
+loader.setPath("EnvironmentAssets/");
+loader.load("EnvironmentAssets.gltf", function (gltf) {
+  const model = gltf.scene;
+  renderer.compileAsync(model, camera, scene);
+  scene.add(model);
+});
 
 var time_prev = 0;
 function animate(time) {
   var dt = time - time_prev;
   dt *= 0.1;
 
-  // cube.rotation.x += 0.01 * dt;
-  // cube.rotation.y += 0.01 * dt;
-  // object.forEach((obj)=>{obj.rotation.z += dt * 0.01});
   const delta = clock.getDelta();
 
   if (mixer) mixer.update(delta);
