@@ -199,8 +199,14 @@ const loader = new GLTFLoader();
 //   scene.add( model );
 // } );
 
-loader.setPath("EnvironmentAssets/");
-loader.load("EnvironmentAssets.gltf", function (gltf) {
+// loader.setPath("EnvironmentAssets/");
+// loader.load("EnvironmentAssets.gltf", function (gltf) {
+//   const model = gltf.scene;
+//   renderer.compileAsync(model, camera, scene);
+//   scene.add(model);
+// });
+loader.setPath("Assets/");
+loader.load("EnvironmetAsset.gltf", function (gltf) {
   const model = gltf.scene;
   renderer.compileAsync(model, camera, scene);
   scene.add(model);
