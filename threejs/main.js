@@ -27,12 +27,12 @@ const camera = new THREE.PerspectiveCamera(
 var player = new Player(
   new ThirdPersonCamera(
     camera,
-    new THREE.Vector3(-5, 2, 0),
+    new THREE.Vector3(0, 2, 0), // kalau mau dibuat first person x = 0, tinggal rotate camera
     new THREE.Vector3(0, 0, 0)
   ),
   new PlayerController(),
   scene,
-  10
+  1
 );
 
 camera.position.set(0, 0, 100); // set posisi camera tp blm arah hadapnya
@@ -141,7 +141,7 @@ function animate(time) {
   const delta = clock.getDelta();
 
   // if (mixer) mixer.update(delta);
-  player.update(dt);
+  player.update(delta);
 
   renderer.render(scene, camera);
 
