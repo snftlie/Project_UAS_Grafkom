@@ -394,6 +394,18 @@ light.shadow.mapSize.height = 512/2; // default
 light.shadow.camera.near = 0.5; // default
 light.shadow.camera.far = 10; // default
 
+// POINT LIGHT buat car
+light = new THREE.PointLight(0xff0000, 30);
+light.position.set(-1.32, 3.5, -8.6);
+light.rotation.set(20,0,0); //arah ke mobil
+light.castShadow = true;
+scene.add(light);
+
+light.shadow.mapSize.width = 512/2; // default
+light.shadow.mapSize.height = 512/2; // default
+light.shadow.camera.near = 0.5; // default
+light.shadow.camera.far = 10; // default
+
 // // SPOT LIGHT
 //     light = new THREE.SpotLight(0xff0000, 50);
 //     light.position.set(10, 10, 0);

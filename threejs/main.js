@@ -26,6 +26,53 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
+function generateCube(dimensions, position, opacity = 0, color = 0x0000FF) {
+  const geometry = new THREE.BoxGeometry(...dimensions);
+  const material = new THREE.MeshBasicMaterial({
+    color: color,
+    metalness: 0, 
+    roughness: 0, 
+    transparent: true,
+    opacity: opacity,
+    // opacity: 0.5,
+    reflectivity: 0, 
+    clearcoat: 0, 
+    clearcoatRoughness: 0
+  });
+  const cube = new THREE.Mesh(geometry, material);
+  cube.position.set(...position);
+  scene.add(cube);
+  return new THREE.Box3().setFromObject(cube);
+}
+// // Character box
+// const characterGeometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
+// const characterMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+// const character = new THREE.Mesh(characterGeometry, characterMaterial);
+// scene.add(character);
+// const characterBoundingBox = new THREE.Box3().setFromObject(character);
+
+// const cubeBoundingBox_ = generateCube([5,14,15],[4.6,5,70],0.5,0xFF00FF) 
+// UKURAN, POS, OPAC, COLOR
+
+// COLLISION 
+let boundBox = [];
+// Generate cubes & bounding boxes
+// boundBox.push(generateCube([10, 10, 80], [-1, 0, 27])); // range jalan
+boundBox.push(generateCube([5, 10, 14], [-4.5, 0, -2.4])); // kiri plg blkg 
+boundBox.push(generateCube([5, 10, 8], [4.95, 0, -4.2])); // kanan plg depan
+boundBox.push(generateCube([5, 10, 8], [-3.8, 0, 8.7])); // kiri blkg 2
+boundBox.push(generateCube([15, 10, 41], [-11.1, 0, 32.341])); // kiri toko, lampu merah
+boundBox.push(generateCube([10, 10, 23], [-10.25, 0, 63])); // kiri depan, tv
+boundBox.push(generateCube([10, 10, 33], [9.443, 0, 14.010])); // kanan ke 2, hotel
+boundBox.push(generateCube([10, 10, 37], [7.143, 0, 49.070])); // kanan depan
+boundBox.push(generateCube([1, 2, 1], [-3.373, 0, 38.296]));  // tempat sampah
+boundBox.push(generateCube([15,10,5],[0,0,-12.57]));  // BATAS UJUNG 1
+boundBox.push(generateCube([7,10,3],[6,0,-9]));  // BATAS UJUNG 1 kcl 
+// boundBox.push(generateCube([15,10,5],[0,0,70],0.5,0xFF00FF));  // BATAS UJUNG 2 (depan)
+boundBox.push(generateCube([5,10,25],[-20.5,0,65.32],0.0,0xFF00FF));  // tambahan dlm
+boundBox.push(generateCube([5,14,15],[4.6,5,70],0.0,0xFF00FF));  // tambahan dlm 2
+boundBox.push(generateCube([45,14,5],[-8.38,5,79.12],0.1,0xFF00FF));  // tembok
+
 var player = new Player(
   new ThirdPersonCamera(
     camera,
@@ -34,7 +81,7 @@ var player = new Player(
   ),
   new PlayerController(),
   scene,
-  1
+  1.0, boundBox
 );
 camera.position.set(0, 0, 100); // set posisi camera tp blm arah hadapnya
 camera.lookAt(-5,3,0); // set posisi kamera menghadap 0,0,0 (rotasi cameranya)
@@ -49,83 +96,12 @@ controls.update();
 // LIGHTING (directional,hemisphere,ambient,dll)
 createLights(scene);
 
-
-// // COLLISION
-// const cubeTransparant2 = new THREE.BoxGeometry(3, 10,80); //ukuran bounding
-// const cubeMaterial2 = new THREE.MeshPhysicalMaterial({
-//   color: 0x26A69A,
-//   metalness: 0.5, 
-//   roughness: 0.5, 
-//   transparent: true,
-//   opacity: 0.3,
-//   reflectivity: 5, 
-//   clearcoat: 1.0, 
-//   clearcoatRoughness: 0.7, 
-  
-// });
-
-// const cube2 = new THREE.Mesh(cubeTransparant2, cubeMaterial2);
-// cube2.position.set(0.8, 0, 27);//posisi bounding
-// scene.add(cube2);
-
-
-// const cube2BoundingBox = new THREE.Box3().setFromObject(cube2);
-
-// // character
-// const characterGeometry = new THREE.BoxGeometry(1, 1, 1);
-// const characterMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-// const character = new THREE.Mesh(characterGeometry, characterMaterial);
-// scene.add(character);
-
-// const characterBoundingBox = new THREE.Box3().setFromObject(character);
-
-// const keys = {};
-// document.addEventListener('keydown', (event) => {
-//   keys[event.key] = true;
-// });
-// document.addEventListener('keyup', (event) => {
-//   keys[event.key] = false;
-// });
-
-// function updateCharacterPosition() {
-//   const speed = 0.1;
-//   let moved = false;
-
-//   if (keys['ArrowUp']) {
-//     character.position.z -= speed;
-//     moved = true;
-//   }
-//   if (keys['ArrowDown']) {
-//     character.position.z += speed;
-//     moved = true;
-//   }
-//   if (keys['ArrowLeft']) {
-//     character.position.x -= speed;
-//     moved = true;
-//   }
-//   if (keys['ArrowRight']) {
-//     character.position.x += speed;
-//     moved = true;
-//   }
-
-//   if (moved) {
-//     characterBoundingBox.setFromObject(character);
-
-//     if (!cube2BoundingBox.containsBox(characterBoundingBox)) {
-//       if (keys['ArrowUp']) character.position.z += speed;
-//       if (keys['ArrowDown']) character.position.z -= speed;
-//       if (keys['ArrowLeft']) character.position.x += speed;
-//       if (keys['ArrowRight']) character.position.x -= speed;
-//     }
-//   }
-// }
-
 // FOG 
 scene.fog = new THREE.FogExp2( 0xE2B2FF, 0.015 );
 
 // OBJECTS 
 //transparent bagian toko 
-const cubeTransparant = new THREE.BoxGeometry(4.7, 3, 0.1);
+const cubeTransparent = new THREE.BoxGeometry(4.7, 3, 0.1);
 const cubeMaterial = new THREE.MeshPhysicalMaterial({
   color: 0xff00ff,
   metalness: 0.5, 
@@ -137,7 +113,7 @@ const cubeMaterial = new THREE.MeshPhysicalMaterial({
   clearcoatRoughness: 0.7, 
 });
 
-const cube = new THREE.Mesh(cubeTransparant, cubeMaterial);
+const cube = new THREE.Mesh(cubeTransparent, cubeMaterial);
 cube.position.set(5.667+1.076+1.076-0.25, 4.558, 2.095-2.095-1.995);
 scene.add(cube);
 
@@ -182,7 +158,7 @@ loader.load("scene.gltf", function (gltf) {
   renderer.compileAsync(model, camera, scene);
   model.receiveShadow = true; 
   model.castShadow = true; 
-  model.scale.setScalar(0.05/2);
+  model.scale.setScalar(0.05/2.2);
   model.rotation.set(0,Math.PI/2,0);
   model.position.set(0.4,-0.2,-12);
   
@@ -195,44 +171,82 @@ loader.load("scene.gltf", function (gltf) {
     }
   })
 });
+loader.setPath("Extra/");
+loader.load("scene.gltf", function (gltf) {
+  const model = gltf.scene;
+  renderer.compileAsync(model, camera, scene);
+  model.receiveShadow = true; 
+  model.castShadow = true; 
+  model.scale.setScalar(1);
+  model.rotation.set(0,Math.PI/2,0);
+  model.position.set(-22.5,0.1,71);
+  
+  // console.log(model);
+  scene.add(model);
+  model.traverse(function(node){
+    if(node.isMesh){
+      node.castShadow = true; 
+      node.receiveShadow = true;
+    }
+  })
+});
+loader.setPath("Extra/");
+loader.load("scene.gltf", function (gltf) {
+  const model = gltf.scene;
+  renderer.compileAsync(model, camera, scene);
+  model.receiveShadow = true; 
+  model.castShadow = true; 
+  model.scale.setScalar(1);
+  model.rotation.set(0,Math.PI/2,0);
+  model.position.set(-10,0,7.5);
+  
+  // console.log(model);
+  scene.add(model);
+  model.traverse(function(node){
+    if(node.isMesh){
+      node.castShadow = true; 
+      node.receiveShadow = true;
+    }
+  })
+});
 
-// let robotModel = null;
-// loader.setPath("Robot/");
-// loader.load("scene.gltf", function (gltf) {
-//   const model = gltf.scene;
-//   renderer.compileAsync(model, camera, scene);
-//   model.receiveShadow = true;
-//   model.castShadow = true;
-//   model.scale.setScalar(1);
-//   model.position.set(2.3, 0, 69.7);
-//   model.rotation.set(0,-Math.PI/2,0);
-//   scene.add(model);
-//   model.traverse(function (node) {
-//     if (node.isMesh) {
-//       node.castShadow = true;
-//       node.receiveShadow = true;
-//     }
-//   });
-//   robotModel = model; //buat animate naik turun
-// });
-// let naik = true;
-// let y = 0; //posisi robot
-// function updateRobot() {
-//   if (robotModel) {
-//     if (naik) {
-//       y += 0.01; // Ubah 0.1 ke nilai yang diinginkan untuk kecepatan naik
-//       if (y >= 0.5) {
-//         naik = false;
-//       }
-//     } else {
-//       y -= 0.01; // Ubah 0.1 ke nilai yang diinginkan untuk kecepatan turun
-//       if (y <= 0) {
-//         naik = true;
-//       }
-//     }
-//     robotModel.position.set(2.3, y, 69.7);
-//   }
-// }
+let robotModel = null;
+loader.setPath("Robot/");
+loader.load("scene.gltf", function (gltf) {
+  const model = gltf.scene;
+  renderer.compileAsync(model, camera, scene);
+  model.receiveShadow = true;
+  model.castShadow = true;
+  model.scale.setScalar(2.4);
+  model.position.set(5, 2, 69.7);
+  model.rotation.set(0,-Math.PI/2,0);
+  scene.add(model);
+  model.traverse(function (node) {
+    if (node.isMesh) {
+      node.castShadow = true;
+      node.receiveShadow = true;
+    }
+  });
+  robotModel = model; //buat animate naik turun
+});
+let naik = true;
+let y = 0; //posisi robot
+function updateRobot() {
+  if (robotModel) {
+    if (naik) {
+      y += 0.02; 
+      if (y >= 1) {
+        naik = false;
+      }
+    } else {
+      y -= 0.02; 
+      if (y <= 0) {
+        naik = true;
+      }
+    }
+    robotModel.position.set(5, 2+y, 69.7);
+  }
+}
 
 var time_prev = 0;
 function animate(time) {
@@ -243,7 +257,6 @@ function animate(time) {
 
   // if (mixer) mixer.update(delta);
   // player.update(delta);
-  // updateCharacterPosition(); //buat collision
 
   updateRobot();
 
