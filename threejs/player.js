@@ -55,7 +55,7 @@ export class Player {
         if (this.mesh && this.animations) {
             const speed = 3.0;
             var direction = new THREE.Vector3(0, 0, 0);
-
+    
             if (this.controller.keys['forward']) {
                 direction.x = speed;
                 this.mesh.rotation.y = Math.PI / 2;
@@ -72,7 +72,7 @@ export class Player {
                 direction.z = speed;
                 this.mesh.rotation.y = 0;
             }
-
+    
             if (direction.length() == 0) {
                 if (this.animations['idle']) {
                     if (this.state != "idle") {
@@ -90,48 +90,50 @@ export class Player {
                     this.mixer.clipAction(this.animations['run'].clip).play();
                 }
             }
-
+    
             if (this.controller.mouseDown) {
                 var dtMouse = this.controller.deltaMousePos;
                 dtMouse.x = dtMouse.x / Math.PI;
                 dtMouse.y = dtMouse.y / Math.PI;
-
+    
                 this.rotationVector.y += dtMouse.x * dt * 10;
                 this.rotationVector.z += dtMouse.y * dt * 10;
                 this.mesh.rotation.y += dtMouse.x * dt * 10;
             }
-
+    
             var forwardVector = new THREE.Vector3(1, 0, 0);
             var rightVector = new THREE.Vector3(0, 0, 1);
             forwardVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), this.rotationVector.y);
             rightVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), this.rotationVector.y);
-
-            // NYIMPEN POSISI SBLMNNYA kalo ada collision
+    
+            // Simpan posisi sebelumnya jika terjadi collision
             const previousPosition = this.mesh.position.clone();
-
+    
             this.mesh.position.add(forwardVector.multiplyScalar(dt * this.speed * direction.x));
             this.mesh.position.add(rightVector.multiplyScalar(dt * this.speed * direction.z));
+    
+            this.camera.setup(this.mesh.position, this.rotationVector, this.boundBoxes); // tambahkan parameter boundBoxes
+            // this.camera.setup(this.mesh.position, this.rotationVector); //third person setup
 
-            this.camera.setup(this.mesh.position, this.rotationVector);
             this.box.setFromObject(this.mesh);
 
-            // CEK COLLISION
+            // Cek collision
             if (this.boundBoxes) {
                 for (let i = 0; i < this.boundBoxes.length; i++) {
                     if (this.box.intersectsBox(this.boundBoxes[i])) {
-                        //kalo ada collision, kembali ke posisi awal sblm collision
+                        // Kembali ke posisi sebelumnya jika terjadi collision
                         this.mesh.position.copy(previousPosition);
                         this.box.setFromObject(this.mesh);
-                        break; //brenti cek box lain
+                        break; // berhenti mengecek box lain
                     }
                 }
             }
-
             if (this.mixer) {
                 this.mixer.update(dt);
             }
         }
     }
+    
 }
 
 export class PlayerController {
@@ -213,13 +215,52 @@ export class ThirdPersonCamera {
         this.positionOffSet = positionOffSet;
         this.targetOffSet = targetOffSet;
     }
-    setup(target, angle) {
+    // setup(target, angle) {
+    //     var temp = new THREE.Vector3(0, 0, 0);
+    //     temp.copy(this.positionOffSet);
+    //     temp.applyAxisAngle(new THREE.Vector3(angle.x, 1, 0), angle.y);
+    //     temp.applyAxisAngle(new THREE.Vector3(angle.y, 0, 1), angle.z);
+    //     temp.addVectors(target, temp);
+    //     this.camera.position.copy(temp);
+    //     temp = new THREE.Vector3(0, 0, 0);
+    //     temp.addVectors(target, this.targetOffSet);
+    //     this.camera.lookAt(temp);
+    // }
+    setup(target, angle, boundBoxes) {
         var temp = new THREE.Vector3(0, 0, 0);
         temp.copy(this.positionOffSet);
         temp.applyAxisAngle(new THREE.Vector3(angle.x, 1, 0), angle.y);
         temp.applyAxisAngle(new THREE.Vector3(angle.y, 0, 1), angle.z);
         temp.addVectors(target, temp);
-        this.camera.position.copy(temp);
+
+        const cameraBox = new THREE.Box3().setFromCenterAndSize(temp, new THREE.Vector3(8, 8, 8)); // Misalkan ukuran kotak adalah 8x8x8
+
+        let closestDistance = Infinity;
+        let adjustedPosition = temp.clone();
+
+        if (boundBoxes) {
+            for (let i = 0; i < boundBoxes.length; i++) {
+                const intersection = cameraBox.intersectsBox(boundBoxes[i]);
+                if (intersection) {
+                    // Calculate closest non-colliding position
+                    const box = boundBoxes[i];
+                    const closestPoint = new THREE.Vector3(
+                        Math.max(box.min.x, Math.min(temp.x, box.max.x)),
+                        Math.max(box.min.y, Math.min(temp.y, box.max.y)),
+                        Math.max(box.min.z, Math.min(temp.z, box.max.z))
+                    );
+                    const distance = temp.distanceToSquared(closestPoint);
+
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        adjustedPosition = closestPoint;
+                    }
+                }
+            }
+        }
+
+        this.camera.position.copy(adjustedPosition);
+
         temp = new THREE.Vector3(0, 0, 0);
         temp.addVectors(target, this.targetOffSet);
         this.camera.lookAt(temp);

@@ -33,8 +33,8 @@ function generateCube(dimensions, position, opacity = 0, color = 0x0000FF) {
     metalness: 0, 
     roughness: 0, 
     transparent: true,
-    opacity: opacity,
-    // opacity: 0.5,
+    // opacity: opacity,
+    opacity: 0.5,
     reflectivity: 0, 
     clearcoat: 0, 
     clearcoatRoughness: 0
@@ -58,20 +58,21 @@ function generateCube(dimensions, position, opacity = 0, color = 0x0000FF) {
 let boundBox = [];
 // Generate cubes & bounding boxes
 // boundBox.push(generateCube([10, 10, 80], [-1, 0, 27])); // range jalan
-boundBox.push(generateCube([5, 10, 14], [-4.5, 0, -2.4])); // kiri plg blkg 
-boundBox.push(generateCube([5, 10, 8], [4.95, 0, -4.2])); // kanan plg depan
-boundBox.push(generateCube([5, 10, 8], [-3.8, 0, 8.7])); // kiri blkg 2
-boundBox.push(generateCube([15, 10, 41], [-11.1, 0, 32.341])); // kiri toko, lampu merah
-boundBox.push(generateCube([10, 10, 23], [-10.25, 0, 63])); // kiri depan, tv
-boundBox.push(generateCube([10, 10, 33], [9.443, 0, 14.010])); // kanan ke 2, hotel
-boundBox.push(generateCube([10, 10, 37], [7.143, 0, 49.070])); // kanan depan
+boundBox.push(generateCube([5, 30, 14], [-4.5, 10, -2.4])); // kiri plg blkg 
+boundBox.push(generateCube([5, 30, 8], [4.95, 10, -4.2])); // kanan plg depan
+boundBox.push(generateCube([5, 30, 8], [-3.8, 10, 8.7])); // kiri blkg 2
+boundBox.push(generateCube([15, 30, 41], [-11.1, 10, 32.341])); // kiri toko, lampu merah
+boundBox.push(generateCube([10, 30, 23], [-10.25, 10, 63])); // kiri depan, tv
+boundBox.push(generateCube([10, 30, 33], [9.443, 10, 14.010])); // kanan ke 2, hotel
+boundBox.push(generateCube([10, 30, 37], [7.143, 10, 49.070])); // kanan depan
 boundBox.push(generateCube([1, 2, 1], [-3.373, 0, 38.296]));  // tempat sampah
-boundBox.push(generateCube([15,10,5],[0,0,-12.57]));  // BATAS UJUNG 1
-boundBox.push(generateCube([7,10,3],[6,0,-9]));  // BATAS UJUNG 1 kcl 
+boundBox.push(generateCube([15,30,5],[0,0,-12.57]));  // BATAS UJUNG 1
+boundBox.push(generateCube([7,30,3],[6,0,-9]));  // BATAS UJUNG 1 kcl 
 // boundBox.push(generateCube([15,10,5],[0,0,70],0.5,0xFF00FF));  // BATAS UJUNG 2 (depan)
 boundBox.push(generateCube([5,10,25],[-20.5,0,65.32],0.0,0xFF00FF));  // tambahan dlm
 boundBox.push(generateCube([5,14,15],[4.6,5,70],0.0,0xFF00FF));  // tambahan dlm 2
 boundBox.push(generateCube([45,14,5],[-8.38,5,79.12],0.1,0xFF00FF));  // tembok
+boundBox.push(generateCube([1,2,5],[-0.75,4.218,8.73],0.5,0xFF00FF) );  // tambahan bound ngawang
 
 var player = new Player(
   new ThirdPersonCamera(
