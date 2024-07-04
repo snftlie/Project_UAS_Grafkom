@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { Player, PlayerController, ThirdPersonCamera } from "./player.js";
-import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js';
+import { RectAreaLightHelper } from "three/addons/helpers/RectAreaLightHelper.js";
 import { createLights } from "./lights.js";
 // import WebGPU from 'three/addons/capabilities/WebGPU.js';
 // import WebGL from 'three/addons/capabilities/WebGL.js';
@@ -19,28 +19,69 @@ document.body.appendChild(renderer.domElement);
 
 //setup scene and camera
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(
+// const camera = new THREE.PerspectiveCamera(
+//   75,
+//   window.innerWidth / window.innerHeight,
+//   0.1,
+//   1000
+// );
+
+// Camera 1 (Perspective Camera)
+const camera1 = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
 );
+camera1.position.set(0, 0, 5);
+
+// Camera 2 (Orthographic Camera)
+const aspect = window.innerWidth / window.innerHeight;
+const camera2 = new THREE.OrthographicCamera(
+  -aspect * 5,
+  aspect * 5,
+  5,
+  -5,
+  0.1,
+  1000
+);
+camera2.position.set(5, 5, 5);
+camera2.lookAt(scene.position);
+
+// Variable to track the current camera
+let currentCamera = camera1;
+
+// Function to switch cameras
+function switchCamera() {
+  const currentPosition = player.camera.camera.position.clone();
+  const currentRotation = player.camera.camera.rotation.clone();
+
+  if (currentCamera === camera1) {
+    currentCamera = camera2;
+    player.camera = currentCamera;
+    currentController = thirdPersonController;
+  } else {
+    currentCamera = camera1;
+    player.camera = currentCamera;
+    currentController = firstPersonController;
+  }
+}
 
 var player = new Player(
   new ThirdPersonCamera(
-    camera,
+    currentCamera,
     new THREE.Vector3(-2, 4, 0), // kalau mau dibuat first person x = 0, tinggal rotate camera
     new THREE.Vector3(0, 0, 0)
   ),
-  new PlayerController(),
   scene,
-  1
+  1,
+  new THREE.Vector3(-20, -17, 55)
 );
-camera.position.set(0, 0, 100); // set posisi camera tp blm arah hadapnya
-camera.lookAt(-5,3,0); // set posisi kamera menghadap 0,0,0 (rotasi cameranya)
+currentCamera.position.set(0, 0, 100); // set posisi camera tp blm arah hadapnya
+currentCamera.lookAt(-5, 3, 0); // set posisi kamera menghadap 0,0,0 (rotasi cameranya)
 
 // Orbit Control
-var controls = new OrbitControls(camera, renderer.domElement);
+var controls = new OrbitControls(currentCamera, renderer.domElement);
 controls.target.set(0, 5, 0);
 controls.minDistance = 0.2;
 controls.maxDistance = 120;
@@ -49,25 +90,23 @@ controls.update();
 // LIGHTING (directional,hemisphere,ambient,dll)
 createLights(scene);
 
-
 // // COLLISION
 // const cubeTransparant2 = new THREE.BoxGeometry(3, 10,80); //ukuran bounding
 // const cubeMaterial2 = new THREE.MeshPhysicalMaterial({
 //   color: 0x26A69A,
-//   metalness: 0.5, 
-//   roughness: 0.5, 
+//   metalness: 0.5,
+//   roughness: 0.5,
 //   transparent: true,
 //   opacity: 0.3,
-//   reflectivity: 5, 
-//   clearcoat: 1.0, 
-//   clearcoatRoughness: 0.7, 
-  
+//   reflectivity: 5,
+//   clearcoat: 1.0,
+//   clearcoatRoughness: 0.7,
+
 // });
 
 // const cube2 = new THREE.Mesh(cubeTransparant2, cubeMaterial2);
 // cube2.position.set(0.8, 0, 27);//posisi bounding
 // scene.add(cube2);
-
 
 // const cube2BoundingBox = new THREE.Box3().setFromObject(cube2);
 
@@ -120,28 +159,26 @@ createLights(scene);
 //   }
 // }
 
-// FOG 
-scene.fog = new THREE.FogExp2( 0xE2B2FF, 0.015 );
+// FOG
+scene.fog = new THREE.FogExp2(0xe2b2ff, 0.015);
 
-// OBJECTS 
-//transparent bagian toko 
+// OBJECTS
+//transparent bagian toko
 const cubeTransparant = new THREE.BoxGeometry(4.7, 3, 0.1);
 const cubeMaterial = new THREE.MeshPhysicalMaterial({
   color: 0xff00ff,
-  metalness: 0.5, 
-  roughness: 0.5, 
+  metalness: 0.5,
+  roughness: 0.5,
   transparent: true,
   opacity: 0.3,
-  reflectivity: 5, 
-  clearcoat: 1.0, 
-  clearcoatRoughness: 0.7, 
+  reflectivity: 5,
+  clearcoat: 1.0,
+  clearcoatRoughness: 0.7,
 });
 
 const cube = new THREE.Mesh(cubeTransparant, cubeMaterial);
-cube.position.set(5.667+1.076+1.076-0.25, 4.558, 2.095-2.095-1.995);
+cube.position.set(5.667 + 1.076 + 1.076 - 0.25, 4.558, 2.095 - 2.095 - 1.995);
 scene.add(cube);
-
-
 
 //==========================================================
 const onProgress = function (xhr) {
@@ -152,60 +189,60 @@ const onProgress = function (xhr) {
 };
 
 const loader = new GLTFLoader();
-loader.setPath("Assets/");
-loader.load("EnvironmetAsset.gltf", function (gltf) {
-  const model = gltf.scene;
-  renderer.compileAsync(model, camera, scene);
-  model.receiveShadow = true; 
-  model.castShadow = true; 
-  console.log(model);
-  scene.add(model);
-  model.traverse(function(node){
-    if(node.isMesh){
-      node.castShadow = true; 
-      node.receiveShadow = true;
-    }
-  //   if (node.material.isMeshStandardMaterial) {
-  //     // Set the roughness
-  //     node.material.roughness = 10; // Adjust this value as needed
-  //     node.material.metalic = -50; // Adjust this value as needed
-  //     node.material.needsUpdate = true;
-  //     node.material.castShadow = true; 
-  //     node.material.receiveShadow = true;
-  // }
-  })
-});
+// loader.setPath("Assets/");
+// loader.load("EnvironmetAsset.gltf", function (gltf) {
+//   const model = gltf.scene;
+//   renderer.compileAsync(model, currentCamera, scene);
+//   model.receiveShadow = true;
+//   model.castShadow = true;
+//   console.log(model);
+//   scene.add(model);
+//   model.traverse(function (node) {
+//     if (node.isMesh) {
+//       node.castShadow = true;
+//       node.receiveShadow = true;
+//     }
+//     //   if (node.material.isMeshStandardMaterial) {
+//     //     // Set the roughness
+//     //     node.material.roughness = 10; // Adjust this value as needed
+//     //     node.material.metalic = -50; // Adjust this value as needed
+//     //     node.material.needsUpdate = true;
+//     //     node.material.castShadow = true;
+//     //     node.material.receiveShadow = true;
+//     // }
+//   });
+// });
 
 loader.setPath("Car/");
 loader.load("scene.gltf", function (gltf) {
   const model = gltf.scene;
-  renderer.compileAsync(model, camera, scene);
-  model.receiveShadow = true; 
-  model.castShadow = true; 
-  model.scale.setScalar(0.05/2);
-  model.rotation.set(0,Math.PI/2,0);
-  model.position.set(0.4,-0.2,-12);
-  
+  renderer.compileAsync(model, currentCamera, scene);
+  model.receiveShadow = true;
+  model.castShadow = true;
+  model.scale.setScalar(0.05 / 2);
+  model.rotation.set(0, Math.PI / 2, 0);
+  model.position.set(0.4, -0.2, -12);
+
   // console.log(model);
   scene.add(model);
-  model.traverse(function(node){
-    if(node.isMesh){
-      node.castShadow = true; 
+  model.traverse(function (node) {
+    if (node.isMesh) {
+      node.castShadow = true;
       node.receiveShadow = true;
     }
-  })
+  });
 });
 
 // let robotModel = null;
 // loader.setPath("Robot/");
 // loader.load("scene.gltf", function (gltf) {
 //   const model = gltf.scene;
-//   renderer.compileAsync(model, camera, scene);
+//   renderer.compileAsync(model, currentCamera, scene);
 //   model.receiveShadow = true;
 //   model.castShadow = true;
 //   model.scale.setScalar(1);
 //   model.position.set(2.3, 0, 69.7);
-//   model.rotation.set(0,-Math.PI/2,0);
+//   model.rotation.set(0, -Math.PI / 2, 0);
 //   scene.add(model);
 //   model.traverse(function (node) {
 //     if (node.isMesh) {
@@ -234,6 +271,26 @@ loader.load("scene.gltf", function (gltf) {
 //   }
 // }
 
+window.addEventListener("keydown", (event) => {
+  if (event.key === "c") {
+    switchCamera();
+  }
+});
+
+window.addEventListener("resize", () => {
+  const aspect = window.innerWidth / window.innerHeight;
+  camera1.aspect = aspect;
+  camera1.updateProjectionMatrix();
+
+  camera2.left = -aspect * 5;
+  camera2.right = aspect * 5;
+  camera2.top = 5;
+  camera2.bottom = -5;
+  camera2.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
 var time_prev = 0;
 function animate(time) {
   var dt = time - time_prev;
@@ -242,12 +299,12 @@ function animate(time) {
   const delta = clock.getDelta();
 
   // if (mixer) mixer.update(delta);
-  // player.update(delta);
+  player.update(delta);
   // updateCharacterPosition(); //buat collision
 
-  updateRobot();
+  // updateRobot();
 
-  renderer.render(scene, camera);
+  renderer.render(scene, currentCamera);
 
   time_prev = time;
   requestAnimationFrame(animate);
