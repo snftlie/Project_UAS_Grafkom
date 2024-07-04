@@ -25,6 +25,7 @@ export class Player {
     this.positionObject = positionObject;
 
     this.camera.setup(positionObject);
+    // this.camera.setup2();
 
     // this.mesh = new THREE.Mesh(
     //     new THREE.BoxGeometry(1,1,1),
@@ -79,6 +80,7 @@ export class Player {
 
       var forwardVector = new THREE.Vector3();
       this.camera.camera.getWorldDirection(forwardVector);
+
       forwardVector.normalize();
       forwardVector = new THREE.Vector3(forwardVector.x, 0, forwardVector.z);
 
@@ -136,7 +138,6 @@ export class Player {
       console.log(direction.length);
       if (direction.length() == 0) {
         if (this.animations["idle"]) {
-          console.log(this.animations["run"]);
           if (this.state != "idle") {
             this.mixer.stopAllAction();
             this.state = "idle";
@@ -398,6 +399,50 @@ export class ThirdPersonCamera {
     this.positionObject = positionObject;
     this.updateCameraPosition(this.theta, this.phi);
   }
+
+  // setup2(target, angle, boundBoxes) {
+  //   var temp = new THREE.Vector3(0, 0, 0);
+  //   temp.copy(this.positionOffSet);
+  //   temp.applyAxisAngle(new THREE.Vector3(angle.x, 1, 0), angle.y);
+  //   temp.applyAxisAngle(new THREE.Vector3(angle.y, 0, 1), angle.z);
+  //   temp.addVectors(target, temp);
+
+  //   const cameraBox = new THREE.Box3().setFromCenterAndSize(
+  //     temp,
+  //     new THREE.Vector3(8, 8, 8)
+  //   ); // Misalkan ukuran kotak adalah 8x8x8
+
+  //   let closestDistance = Infinity;
+  //   let adjustedPosition = temp.clone();
+
+  //   if (boundBoxes) {
+  //     for (let i = 0; i < boundBoxes.length; i++) {
+  //       const intersection = cameraBox.intersectsBox(boundBoxes[i]);
+  //       if (intersection) {
+  //         // Calculate closest non-colliding position
+  //         const box = boundBoxes[i];
+  //         const closestPoint = new THREE.Vector3(
+  //           Math.max(box.min.x, Math.min(temp.x, box.max.x)),
+  //           Math.max(box.min.y, Math.min(temp.y, box.max.y)),
+  //           Math.max(box.min.z, Math.min(temp.z, box.max.z))
+  //         );
+  //         const distance = temp.distanceToSquared(closestPoint);
+
+  //         if (distance < closestDistance) {
+  //           closestDistance = distance;
+  //           adjustedPosition = closestPoint;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   this.camera.position.copy(adjustedPosition);
+
+  //   temp = new THREE.Vector3(0, 0, 0);
+  //   temp.addVectors(target, this.targetOffSet);
+  //   this.camera.lookAt(temp);
+  // }
+
   zoom(deltaZoom) {
     this.zoomLevel += deltaZoom * 0.1;
     this.zoomLevel = Math.max(0.5, Math.min(this.zoomLevel, 2)); // Clamp zoom level between 0.5 and 2
@@ -420,13 +465,13 @@ export class FirstPersonCamera {
   }
 
   updateCameraPosition() {
-    const x = this.positionObject.x + this.zoomLevel;
-    const y = this.positionObject.y + 15 + this.zoomLevel;
-    const z = this.positionObject.z + 5 + this.zoomLevel;
+    const x = this.positionObject.x - 1 + this.zoomLevel;
+    const y = this.positionObject.y + 1 + this.zoomLevel;
+    const z = this.positionObject.z - 1 + this.zoomLevel;
     this.camera.position.set(x, y, z);
   }
 
-  setup2(positionObject) {
+  setup(positionObject) {
     if (!this.doOnce) {
       this.doOnce = true;
       // this.camera.lookAt(positionObject);
@@ -435,8 +480,77 @@ export class FirstPersonCamera {
     this.updateCameraPosition();
   }
 
+  // setup2(target, angle, boundBoxes) {
+  //   var temp = new THREE.Vector3(0, 0, 0);
+  //   temp.copy(this.positionOffSet);
+  //   temp.applyAxisAngle(new THREE.Vector3(angle.x, 1, 0), angle.y);
+  //   temp.applyAxisAngle(new THREE.Vector3(angle.y, 0, 1), angle.z);
+  //   temp.addVectors(target, temp);
+
+  //   const cameraBox = new THREE.Box3().setFromCenterAndSize(
+  //     temp,
+  //     new THREE.Vector3(8, 8, 8)
+  //   ); // Misalkan ukuran kotak adalah 8x8x8
+
+  //   let closestDistance = Infinity;
+  //   let adjustedPosition = temp.clone();
+
+  //   if (boundBoxes) {
+  //     for (let i = 0; i < boundBoxes.length; i++) {
+  //       const intersection = cameraBox.intersectsBox(boundBoxes[i]);
+  //       if (intersection) {
+  //         // Calculate closest non-colliding position
+  //         const box = boundBoxes[i];
+  //         const closestPoint = new THREE.Vector3(
+  //           Math.max(box.min.x, Math.min(temp.x, box.max.x)),
+  //           Math.max(box.min.y, Math.min(temp.y, box.max.y)),
+  //           Math.max(box.min.z, Math.min(temp.z, box.max.z))
+  //         );
+  //         const distance = temp.distanceToSquared(closestPoint);
+
+  //         if (distance < closestDistance) {
+  //           closestDistance = distance;
+  //           adjustedPosition = closestPoint;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   this.camera.position.copy(adjustedPosition);
+
+  //   temp = new THREE.Vector3(0, 0, 0);
+  //   temp.addVectors(target, this.targetOffSet);
+  //   this.camera.lookAt(temp);
+  // }
+
   zoom(deltaZoom) {
     this.zoomLevel += deltaZoom * 0.01;
     this.zoomLevel = Math.max(0.1, Math.min(this.zoomLevel, 2)); // Clamp zoom level between 0.5 and 2
+  }
+
+  rotate(roll, pitch, yaw) {
+    // Apply rotation based on input
+    this.camera.rotation.x += pitch;
+    this.camera.rotation.y += yaw;
+    this.camera.rotation.z += roll;
+
+    // Ensure pitch stays within the range of [-π/3, π/3] (around -60 to 60 degrees)
+    const maxPitch = Math.PI / 3; // 60 degrees in radians
+    this.camera.rotation.x = Math.max(
+      -maxPitch + 0.01,
+      Math.min(maxPitch - 0.01, this.camera.rotation.x)
+    );
+
+    const maxYaw = Math.PI / 3; // 60 degrees in radians
+    if (Math.abs(this.camera.rotation.y) > maxYaw) {
+      this.camera.rotation.y = Math.sign(this.camera.rotation.y) * maxYaw;
+    }
+
+    // Ensure roll stays within the range of [-π/3, π/3] (around -60 to 60 degrees)
+    const maxRoll = Math.PI / 3; // 60 degrees in radians
+    this.camera.rotation.z = Math.max(
+      -maxRoll + 0.01,
+      Math.min(maxRoll - 0.01, this.camera.rotation.z)
+    );
   }
 }

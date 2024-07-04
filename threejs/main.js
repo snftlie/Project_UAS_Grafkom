@@ -2,7 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-import { Player, PlayerController, ThirdPersonCamera } from "./player.js";
+import {
+  Player,
+  PlayerController,
+  ThirdPersonCamera,
+  FirstPersonCamera,
+} from "./player.js";
 import { RectAreaLightHelper } from "three/addons/helpers/RectAreaLightHelper.js";
 import { createLights } from "./lights.js";
 // import WebGPU from 'three/addons/capabilities/WebGPU.js';
@@ -53,24 +58,80 @@ let currentCamera = camera1;
 
 // Function to switch cameras
 function switchCamera() {
-  const currentPosition = player.camera.camera.position.clone();
-  const currentRotation = player.camera.camera.rotation.clone();
+  const currentPosition = player.camera.position.clone();
+  const currentRotation = player.camera.rotation.clone();
 
   if (currentCamera === camera1) {
     currentCamera = camera2;
     player.camera = currentCamera;
-    currentController = thirdPersonController;
+    PlayerController.ThirdPersonCamera = ThirdPersonCamera;
   } else {
     currentCamera = camera1;
     player.camera = currentCamera;
-    currentController = firstPersonController;
+    PlayerController.ThirdPersonCamera = FirstPersonCamera;
+  }
+  // Setel ulang posisi dan rotasi pemain sesuai dengan kamera yang baru
+  player.camera.position.copy(currentPosition);
+  player.camera.rotation.copy(currentRotation);
+
+  // Setel ulang lookAt ke posisi player jika menggunakan kamera orang ketiga
+  if (player.camera instanceof ThirdPersonCamera) {
+    player.camera.camera.lookAt(player.positionObject);
   }
 }
+
+function generateCube(dimensions, position, opacity = 0, color = 0x0000ff) {
+  const geometry = new THREE.BoxGeometry(...dimensions);
+  const material = new THREE.MeshBasicMaterial({
+    color: color,
+    metalness: 0,
+    roughness: 0,
+    transparent: true,
+    opacity: opacity,
+    // opacity: 0.5,
+    reflectivity: 0,
+    clearcoat: 0,
+    clearcoatRoughness: 0,
+  });
+  const cube = new THREE.Mesh(geometry, material);
+  cube.position.set(...position);
+  scene.add(cube);
+  return new THREE.Box3().setFromObject(cube);
+}
+// // Character box
+// const characterGeometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
+// const characterMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+// const character = new THREE.Mesh(characterGeometry, characterMaterial);
+// scene.add(character);
+// const characterBoundingBox = new THREE.Box3().setFromObject(character);
+
+// const cubeBoundingBox_ = generateCube([5,14,15],[4.6,5,70],0.5,0xFF00FF)
+// UKURAN, POS, OPAC, COLOR
+
+// COLLISION
+let boundBox = [];
+// Generate cubes & bounding boxes
+// boundBox.push(generateCube([10, 10, 80], [-1, 0, 27])); // range jalan
+boundBox.push(generateCube([5, 30, 14], [-4.5, 10, -2.4])); // kiri plg blkg
+boundBox.push(generateCube([5, 30, 8], [4.95, 10, -4.2])); // kanan plg depan
+boundBox.push(generateCube([5, 30, 8], [-3.8, 10, 8.7])); // kiri blkg 2
+boundBox.push(generateCube([15, 30, 41], [-11.1, 10, 32.341])); // kiri toko, lampu merah
+boundBox.push(generateCube([10, 30, 23], [-10.25, 10, 63])); // kiri depan, tv
+boundBox.push(generateCube([10, 30, 33], [9.443, 10, 14.01])); // kanan ke 2, hotel
+boundBox.push(generateCube([10, 30, 37], [7.143, 10, 49.07])); // kanan depan
+boundBox.push(generateCube([1, 2, 1], [-3.373, 0, 38.296])); // tempat sampah
+boundBox.push(generateCube([15, 30, 5], [0, 0, -12.57])); // BATAS UJUNG 1
+boundBox.push(generateCube([7, 30, 3], [6, 0, -9])); // BATAS UJUNG 1 kcl
+// boundBox.push(generateCube([15,10,5],[0,0,70],0.5,0xFF00FF));  // BATAS UJUNG 2 (depan)
+boundBox.push(generateCube([5, 10, 25], [-20.5, 0, 65.32], 0.0, 0xff00ff)); // tambahan dlm
+boundBox.push(generateCube([5, 14, 15], [4.6, 5, 70], 0.0, 0xff00ff)); // tambahan dlm 2
+boundBox.push(generateCube([45, 14, 5], [-8.38, 5, 79.12], 0.1, 0xff00ff)); // tembok
+boundBox.push(generateCube([1, 2, 5], [-0.75, 4.218, 8.73], 0.0, 0xff00ff)); // tambahan bound ngawang
 
 var player = new Player(
   new ThirdPersonCamera(
     currentCamera,
-    new THREE.Vector3(-2, 4, 0), // kalau mau dibuat first person x = 0, tinggal rotate camera
+    new THREE.Vector3(0, 4, 0), // kalau mau dibuat first person x = 0, tinggal rotate camera
     new THREE.Vector3(0, 0, 0)
   ),
   scene,
@@ -78,7 +139,7 @@ var player = new Player(
   new THREE.Vector3(-20, -17, 55)
 );
 currentCamera.position.set(0, 0, 100); // set posisi camera tp blm arah hadapnya
-currentCamera.lookAt(-5, 3, 0); // set posisi kamera menghadap 0,0,0 (rotasi cameranya)
+currentCamera.lookAt(0, 4, 0); // set posisi kamera menghadap 0,0,0 (rotasi cameranya)
 
 // Orbit Control
 var controls = new OrbitControls(currentCamera, renderer.domElement);
@@ -89,75 +150,6 @@ controls.update();
 
 // LIGHTING (directional,hemisphere,ambient,dll)
 createLights(scene);
-
-// // COLLISION
-// const cubeTransparant2 = new THREE.BoxGeometry(3, 10,80); //ukuran bounding
-// const cubeMaterial2 = new THREE.MeshPhysicalMaterial({
-//   color: 0x26A69A,
-//   metalness: 0.5,
-//   roughness: 0.5,
-//   transparent: true,
-//   opacity: 0.3,
-//   reflectivity: 5,
-//   clearcoat: 1.0,
-//   clearcoatRoughness: 0.7,
-
-// });
-
-// const cube2 = new THREE.Mesh(cubeTransparant2, cubeMaterial2);
-// cube2.position.set(0.8, 0, 27);//posisi bounding
-// scene.add(cube2);
-
-// const cube2BoundingBox = new THREE.Box3().setFromObject(cube2);
-
-// // character
-// const characterGeometry = new THREE.BoxGeometry(1, 1, 1);
-// const characterMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-// const character = new THREE.Mesh(characterGeometry, characterMaterial);
-// scene.add(character);
-
-// const characterBoundingBox = new THREE.Box3().setFromObject(character);
-
-// const keys = {};
-// document.addEventListener('keydown', (event) => {
-//   keys[event.key] = true;
-// });
-// document.addEventListener('keyup', (event) => {
-//   keys[event.key] = false;
-// });
-
-// function updateCharacterPosition() {
-//   const speed = 0.1;
-//   let moved = false;
-
-//   if (keys['ArrowUp']) {
-//     character.position.z -= speed;
-//     moved = true;
-//   }
-//   if (keys['ArrowDown']) {
-//     character.position.z += speed;
-//     moved = true;
-//   }
-//   if (keys['ArrowLeft']) {
-//     character.position.x -= speed;
-//     moved = true;
-//   }
-//   if (keys['ArrowRight']) {
-//     character.position.x += speed;
-//     moved = true;
-//   }
-
-//   if (moved) {
-//     characterBoundingBox.setFromObject(character);
-
-//     if (!cube2BoundingBox.containsBox(characterBoundingBox)) {
-//       if (keys['ArrowUp']) character.position.z += speed;
-//       if (keys['ArrowDown']) character.position.z -= speed;
-//       if (keys['ArrowLeft']) character.position.x += speed;
-//       if (keys['ArrowRight']) character.position.x -= speed;
-//     }
-//   }
-// }
 
 // FOG
 scene.fog = new THREE.FogExp2(0xe2b2ff, 0.015);
@@ -189,29 +181,29 @@ const onProgress = function (xhr) {
 };
 
 const loader = new GLTFLoader();
-// loader.setPath("Assets/");
-// loader.load("EnvironmetAsset.gltf", function (gltf) {
-//   const model = gltf.scene;
-//   renderer.compileAsync(model, currentCamera, scene);
-//   model.receiveShadow = true;
-//   model.castShadow = true;
-//   console.log(model);
-//   scene.add(model);
-//   model.traverse(function (node) {
-//     if (node.isMesh) {
-//       node.castShadow = true;
-//       node.receiveShadow = true;
-//     }
-//     //   if (node.material.isMeshStandardMaterial) {
-//     //     // Set the roughness
-//     //     node.material.roughness = 10; // Adjust this value as needed
-//     //     node.material.metalic = -50; // Adjust this value as needed
-//     //     node.material.needsUpdate = true;
-//     //     node.material.castShadow = true;
-//     //     node.material.receiveShadow = true;
-//     // }
-//   });
-// });
+loader.setPath("Assets/");
+loader.load("EnvironmetAsset.gltf", function (gltf) {
+  const model = gltf.scene;
+  renderer.compileAsync(model, currentCamera, scene);
+  model.receiveShadow = true;
+  model.castShadow = true;
+  console.log(model);
+  scene.add(model);
+  model.traverse(function (node) {
+    if (node.isMesh) {
+      node.castShadow = true;
+      node.receiveShadow = true;
+    }
+    //   if (node.material.isMeshStandardMaterial) {
+    //     // Set the roughness
+    //     node.material.roughness = 10; // Adjust this value as needed
+    //     node.material.metalic = -50; // Adjust this value as needed
+    //     node.material.needsUpdate = true;
+    //     node.material.castShadow = true;
+    //     node.material.receiveShadow = true;
+    // }
+  });
+});
 
 loader.setPath("Car/");
 loader.load("scene.gltf", function (gltf) {
@@ -233,43 +225,43 @@ loader.load("scene.gltf", function (gltf) {
   });
 });
 
-// let robotModel = null;
-// loader.setPath("Robot/");
-// loader.load("scene.gltf", function (gltf) {
-//   const model = gltf.scene;
-//   renderer.compileAsync(model, currentCamera, scene);
-//   model.receiveShadow = true;
-//   model.castShadow = true;
-//   model.scale.setScalar(1);
-//   model.position.set(2.3, 0, 69.7);
-//   model.rotation.set(0, -Math.PI / 2, 0);
-//   scene.add(model);
-//   model.traverse(function (node) {
-//     if (node.isMesh) {
-//       node.castShadow = true;
-//       node.receiveShadow = true;
-//     }
-//   });
-//   robotModel = model; //buat animate naik turun
-// });
-// let naik = true;
-// let y = 0; //posisi robot
-// function updateRobot() {
-//   if (robotModel) {
-//     if (naik) {
-//       y += 0.01; // Ubah 0.1 ke nilai yang diinginkan untuk kecepatan naik
-//       if (y >= 0.5) {
-//         naik = false;
-//       }
-//     } else {
-//       y -= 0.01; // Ubah 0.1 ke nilai yang diinginkan untuk kecepatan turun
-//       if (y <= 0) {
-//         naik = true;
-//       }
-//     }
-//     robotModel.position.set(2.3, y, 69.7);
-//   }
-// }
+let robotModel = null;
+loader.setPath("Robot/");
+loader.load("scene.gltf", function (gltf) {
+  const model = gltf.scene;
+  renderer.compileAsync(model, currentCamera, scene);
+  model.receiveShadow = true;
+  model.castShadow = true;
+  model.scale.setScalar(1);
+  model.position.set(2.3, 0, 69.7);
+  model.rotation.set(0, -Math.PI / 2, 0);
+  scene.add(model);
+  model.traverse(function (node) {
+    if (node.isMesh) {
+      node.castShadow = true;
+      node.receiveShadow = true;
+    }
+  });
+  robotModel = model; //buat animate naik turun
+});
+let naik = true;
+let y = 0; //posisi robot
+function updateRobot() {
+  if (robotModel) {
+    if (naik) {
+      y += 0.01; // Ubah 0.1 ke nilai yang diinginkan untuk kecepatan naik
+      if (y >= 0.5) {
+        naik = false;
+      }
+    } else {
+      y -= 0.01; // Ubah 0.1 ke nilai yang diinginkan untuk kecepatan turun
+      if (y <= 0) {
+        naik = true;
+      }
+    }
+    robotModel.position.set(2.3, y, 69.7);
+  }
+}
 
 window.addEventListener("keydown", (event) => {
   if (event.key === "c") {
@@ -302,7 +294,7 @@ function animate(time) {
   player.update(delta);
   // updateCharacterPosition(); //buat collision
 
-  // updateRobot();
+  updateRobot();
 
   renderer.render(scene, currentCamera);
 
