@@ -8,7 +8,7 @@ import {
   ThirdPersonCamera,
   FirstPersonCamera,
 } from "./player.js";
-import { RectAreaLightHelper } from "three/addons/helpers/RectAreaLightHelper.js";
+import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js';
 import { createLights } from "./lights.js";
 // import WebGPU from 'three/addons/capabilities/WebGPU.js';
 // import WebGL from 'three/addons/capabilities/WebGL.js';
@@ -80,18 +80,18 @@ function switchCamera() {
   }
 }
 
-function generateCube(dimensions, position, opacity = 0, color = 0x0000ff) {
+function generateCube(dimensions, position, opacity = 0, color = 0x0000FF) {
   const geometry = new THREE.BoxGeometry(...dimensions);
   const material = new THREE.MeshBasicMaterial({
     color: color,
-    metalness: 0,
-    roughness: 0,
+    metalness: 0, 
+    roughness: 0, 
     transparent: true,
     opacity: opacity,
     // opacity: 0.5,
-    reflectivity: 0,
-    clearcoat: 0,
-    clearcoatRoughness: 0,
+    reflectivity: 0, 
+    clearcoat: 0, 
+    clearcoatRoughness: 0
   });
   const cube = new THREE.Mesh(geometry, material);
   cube.position.set(...position);
@@ -105,29 +105,45 @@ function generateCube(dimensions, position, opacity = 0, color = 0x0000ff) {
 // scene.add(character);
 // const characterBoundingBox = new THREE.Box3().setFromObject(character);
 
-// const cubeBoundingBox_ = generateCube([5,14,15],[4.6,5,70],0.5,0xFF00FF)
+// const cubeBoundingBox_ = generateCube([1.4,3.5,0.54],[4.213,5.284,0.292],0.5,0xFF00FF) 
 // UKURAN, POS, OPAC, COLOR
 
-// COLLISION
+// COLLISION 
 let boundBox = [];
 // Generate cubes & bounding boxes
 // boundBox.push(generateCube([10, 10, 80], [-1, 0, 27])); // range jalan
-boundBox.push(generateCube([5, 30, 14], [-4.5, 10, -2.4])); // kiri plg blkg
+boundBox.push(generateCube([5, 30, 14], [-4.5, 10, -2.4])); // kiri plg blkg 
 boundBox.push(generateCube([5, 30, 8], [4.95, 10, -4.2])); // kanan plg depan
 boundBox.push(generateCube([5, 30, 8], [-3.8, 10, 8.7])); // kiri blkg 2
 boundBox.push(generateCube([15, 30, 41], [-11.1, 10, 32.341])); // kiri toko, lampu merah
 boundBox.push(generateCube([10, 30, 23], [-10.25, 10, 63])); // kiri depan, tv
-boundBox.push(generateCube([10, 30, 33], [9.443, 10, 14.01])); // kanan ke 2, hotel
-boundBox.push(generateCube([10, 30, 37], [7.143, 10, 49.07])); // kanan depan
-boundBox.push(generateCube([1, 2, 1], [-3.373, 0, 38.296])); // tempat sampah
-boundBox.push(generateCube([15, 30, 5], [0, 0, -12.57])); // BATAS UJUNG 1
-boundBox.push(generateCube([7, 30, 3], [6, 0, -9])); // BATAS UJUNG 1 kcl
+boundBox.push(generateCube([10, 30, 33], [9.443, 10, 14.010])); // kanan ke 2, hotel
+boundBox.push(generateCube([10, 30, 37], [7.143, 10, 49.070])); // kanan depan
+boundBox.push(generateCube([1, 2, 1], [-3.373, 0, 38.296]));  // tempat sampah
+boundBox.push(generateCube([15,30,5],[0,0,-12.57]));  // BATAS UJUNG 1
+boundBox.push(generateCube([7,30,3],[6,0,-9]));  // BATAS UJUNG 1 kcl 
 // boundBox.push(generateCube([15,10,5],[0,0,70],0.5,0xFF00FF));  // BATAS UJUNG 2 (depan)
-boundBox.push(generateCube([5, 10, 25], [-20.5, 0, 65.32], 0.0, 0xff00ff)); // tambahan dlm
-boundBox.push(generateCube([5, 14, 15], [4.6, 5, 70], 0.0, 0xff00ff)); // tambahan dlm 2
-boundBox.push(generateCube([45, 14, 5], [-8.38, 5, 79.12], 0.1, 0xff00ff)); // tembok
-boundBox.push(generateCube([1, 2, 5], [-0.75, 4.218, 8.73], 0.0, 0xff00ff)); // tambahan bound ngawang
+boundBox.push(generateCube([5,10,25],[-20.5,0,65.32],0.0,0xFF00FF));  // tambahan dlm
+boundBox.push(generateCube([5,14,15],[4.6,5,70],0.0,0xFF00FF));  // tambahan dlm 2
+boundBox.push(generateCube([45,14,5],[-8.38,5,79.12],0.1,0xFF00FF));  // tembok
+boundBox.push(generateCube([1,2,5],[-0.75,4.218,8.73],0.0,0xFF00FF) );  // tambahan bound ngawang
+boundBox.push(generateCube([10,9,9],[-6.474,11.631,43.66],0.0,0xFF00FF) );  // collision camera 1
+boundBox.push(generateCube([9.1,8.68,9],[1.919,11.631,60],0.0,0xFF00FF) );  // collision camera 2
+boundBox.push(generateCube([1.4,3.5,0.54],[4.213,5.284,0.292],0.0,0xFF00FF) );  // collision camera 3
 
+// pny sharon
+var player = new Player(
+  new ThirdPersonCamera(
+    // camera,
+    currentCamera,
+    new THREE.Vector3(-2, 4, 0), // kalau mau dibuat first person x = 0, tinggal rotate camera
+    new THREE.Vector3(0, 0, 0)
+  ),
+  new PlayerController(),
+  scene,
+  1.0, boundBox
+);
+// pny feli
 var player = new Player(
   new ThirdPersonCamera(
     currentCamera,
@@ -138,6 +154,7 @@ var player = new Player(
   1,
   new THREE.Vector3(-20, -17, 55)
 );
+
 currentCamera.position.set(0, 0, 100); // set posisi camera tp blm arah hadapnya
 currentCamera.lookAt(0, 4, 0); // set posisi kamera menghadap 0,0,0 (rotasi cameranya)
 
@@ -151,26 +168,28 @@ controls.update();
 // LIGHTING (directional,hemisphere,ambient,dll)
 createLights(scene);
 
-// FOG
-scene.fog = new THREE.FogExp2(0xe2b2ff, 0.015);
+// FOG 
+scene.fog = new THREE.FogExp2( 0xE2B2FF, 0.015 );
 
-// OBJECTS
-//transparent bagian toko
-const cubeTransparant = new THREE.BoxGeometry(4.7, 3, 0.1);
+// OBJECTS 
+//transparent bagian toko 
+const cubeTransparent = new THREE.BoxGeometry(4.7, 3, 0.1);
 const cubeMaterial = new THREE.MeshPhysicalMaterial({
   color: 0xff00ff,
-  metalness: 0.5,
-  roughness: 0.5,
+  metalness: 0.5, 
+  roughness: 0.5, 
   transparent: true,
   opacity: 0.3,
-  reflectivity: 5,
-  clearcoat: 1.0,
-  clearcoatRoughness: 0.7,
+  reflectivity: 5, 
+  clearcoat: 1.0, 
+  clearcoatRoughness: 0.7, 
 });
 
-const cube = new THREE.Mesh(cubeTransparant, cubeMaterial);
-cube.position.set(5.667 + 1.076 + 1.076 - 0.25, 4.558, 2.095 - 2.095 - 1.995);
+const cube = new THREE.Mesh(cubeTransparent, cubeMaterial);
+cube.position.set(5.667+1.076+1.076-0.25, 4.558, 2.095-2.095-1.995);
 scene.add(cube);
+
+
 
 //==========================================================
 const onProgress = function (xhr) {
@@ -185,23 +204,23 @@ loader.setPath("Assets/");
 loader.load("EnvironmetAsset.gltf", function (gltf) {
   const model = gltf.scene;
   renderer.compileAsync(model, currentCamera, scene);
-  model.receiveShadow = true;
-  model.castShadow = true;
+  model.receiveShadow = true; 
+  model.castShadow = true; 
   console.log(model);
   scene.add(model);
   model.traverse(function (node) {
     if (node.isMesh) {
-      node.castShadow = true;
+      node.castShadow = true; 
       node.receiveShadow = true;
     }
-    //   if (node.material.isMeshStandardMaterial) {
-    //     // Set the roughness
-    //     node.material.roughness = 10; // Adjust this value as needed
-    //     node.material.metalic = -50; // Adjust this value as needed
-    //     node.material.needsUpdate = true;
-    //     node.material.castShadow = true;
-    //     node.material.receiveShadow = true;
-    // }
+  //   if (node.material.isMeshStandardMaterial) {
+  //     // Set the roughness
+  //     node.material.roughness = 10; // Adjust this value as needed
+  //     node.material.metalic = -50; // Adjust this value as needed
+  //     node.material.needsUpdate = true;
+  //     node.material.castShadow = true; 
+  //     node.material.receiveShadow = true;
+  // }
   });
 });
 
@@ -209,12 +228,31 @@ loader.setPath("Car/");
 loader.load("scene.gltf", function (gltf) {
   const model = gltf.scene;
   renderer.compileAsync(model, currentCamera, scene);
-  model.receiveShadow = true;
-  model.castShadow = true;
-  model.scale.setScalar(0.05 / 2);
-  model.rotation.set(0, Math.PI / 2, 0);
-  model.position.set(0.4, -0.2, -12);
-
+  model.receiveShadow = true; 
+  model.castShadow = true; 
+  model.scale.setScalar(0.05/2.2);
+  model.rotation.set(0,Math.PI/2,0);
+  model.position.set(0.4,-0.2,-12);
+  
+  // console.log(model);
+  scene.add(model);
+  model.traverse(function(node){
+    if(node.isMesh){
+      node.castShadow = true; 
+      node.receiveShadow = true;
+    }
+  })
+});
+loader.setPath("Extra/");
+loader.load("scene.gltf", function (gltf) {
+  const model = gltf.scene;
+  renderer.compileAsync(model, camera, scene);
+  model.receiveShadow = true; 
+  model.castShadow = true; 
+  model.scale.setScalar(1);
+  model.rotation.set(0,Math.PI/2,0);
+  model.position.set(-22.5,0.1,71);
+  
   // console.log(model);
   scene.add(model);
   model.traverse(function (node) {
@@ -224,6 +262,25 @@ loader.load("scene.gltf", function (gltf) {
     }
   });
 });
+loader.setPath("Extra/");
+loader.load("scene.gltf", function (gltf) {
+  const model = gltf.scene;
+  renderer.compileAsync(model, camera, scene);
+  model.receiveShadow = true; 
+  model.castShadow = true; 
+  model.scale.setScalar(1);
+  model.rotation.set(0,Math.PI/2,0);
+  model.position.set(-10,0,7.5);
+  
+  // console.log(model);
+  scene.add(model);
+  model.traverse(function(node){
+    if(node.isMesh){
+      node.castShadow = true; 
+      node.receiveShadow = true;
+    }
+  })
+});
 
 let robotModel = null;
 loader.setPath("Robot/");
@@ -232,9 +289,9 @@ loader.load("scene.gltf", function (gltf) {
   renderer.compileAsync(model, currentCamera, scene);
   model.receiveShadow = true;
   model.castShadow = true;
-  model.scale.setScalar(1);
-  model.position.set(2.3, 0, 69.7);
-  model.rotation.set(0, -Math.PI / 2, 0);
+  model.scale.setScalar(2.4);
+  model.position.set(5, 2, 69.7);
+  model.rotation.set(0,-Math.PI/2,0);
   scene.add(model);
   model.traverse(function (node) {
     if (node.isMesh) {
@@ -249,20 +306,21 @@ let y = 0; //posisi robot
 function updateRobot() {
   if (robotModel) {
     if (naik) {
-      y += 0.01; // Ubah 0.1 ke nilai yang diinginkan untuk kecepatan naik
-      if (y >= 0.5) {
+      y += 0.02; 
+      if (y >= 1) {
         naik = false;
       }
     } else {
-      y -= 0.01; // Ubah 0.1 ke nilai yang diinginkan untuk kecepatan turun
+      y -= 0.02; 
       if (y <= 0) {
         naik = true;
       }
     }
-    robotModel.position.set(2.3, y, 69.7);
+    robotModel.position.set(5, 2+y, 69.7);
   }
 }
 
+// SWITCH CAMERA pake "c"
 window.addEventListener("keydown", (event) => {
   if (event.key === "c") {
     switchCamera();
@@ -291,8 +349,7 @@ function animate(time) {
   const delta = clock.getDelta();
 
   // if (mixer) mixer.update(delta);
-  player.update(delta);
-  // updateCharacterPosition(); //buat collision
+  // player.update(delta);
 
   updateRobot();
 
